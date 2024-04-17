@@ -33,13 +33,12 @@ async def _ws_agen(worker_tickers):
 
         while True:
             msg = await websocket.recv()
-            # YahooFinance uses Protobuf
-            # We need to decode the messages and convert them to JSON
+            # YahooFinance uses Protobufs
+            # We need to deserialize the messages
             ticker_ = Ticker()
             msg_bytes = base64.b64decode(msg)
             ticker_.ParseFromString(msg_bytes)
-            msg_json = MessageToJson(ticker_)
-            yield (ticker_.id, json.loads(msg_json))
+            yield ticker_.id, ticker_
 
 # Yahoo partition class inherited from Bytewax input StatefulSourcePartition class
 class YahooPartition(StatefulSourcePartition):
@@ -96,9 +95,7 @@ inp = op.input(
 # Printing dataflow
 op.inspect("input_check", inp)
 
-# Run the file to run the dataflow or type in your terminal the following command:
+# Type in your terminal the following command to run the dataflow:
 # python -m bytewax.run dataflow
 # Please note that will launch an infinite loop, use Ctrl+C to interrupt...
 # ...(you will get an error message you can ignore)
-if __name__ == "__main__":
-    run_main(flow)
