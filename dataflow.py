@@ -1,6 +1,6 @@
 '''
 This script is an example of YahooFinance Connector that retrieves 
-data from Yahoo Finance in real-time. This is based on websockets and bytewax 
+data from Yahoo! Finance in real-time. This is based on websockets and bytewax 
 (open-source framework to build highly scalable pipelines).
 '''
 import base64
@@ -14,7 +14,6 @@ from bytewax.dataflow import Dataflow
 from bytewax.inputs import FixedPartitionedSource, StatefulSourcePartition, batch_async
 
 import websockets
-from google.protobuf.json_format import MessageToJson
 from ticker_pb2 import Ticker
 
 # input
