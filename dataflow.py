@@ -8,8 +8,6 @@ import json
 from datetime import timedelta
 
 from bytewax import operators as op
-from bytewax.testing import run_main
-
 from bytewax.dataflow import Dataflow
 from bytewax.inputs import FixedPartitionedSource, StatefulSourcePartition, batch_async
 
